@@ -8,37 +8,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-/**
- * Tests für Shop#repair und Shop#deliver (Aufgabe 2.3 – Bonus).
- *
- * <h2>Annahmen über das Verhalten</h2>
- *
- * <h3>Shop#repair()</h3>
- *
- * <ul>
- *   <li>Nimmt den ältesten (ersten) offenen Auftrag aus {@code pendingOrders} (FIFO).
- *   <li>Fügt ihn in {@code completedOrders} ein.
- *   <li>Gibt den reparierten Auftrag als {@code Optional<Order>} zurück.
- *   <li>Gibt {@code Optional.empty()} zurück, wenn keine offenen Aufträge vorhanden sind.
- * </ul>
- *
- * <h3>Shop#deliver(String c)</h3>
- *
- * <ul>
- *   <li>Sucht in {@code completedOrders} nach einem Auftrag des Kunden {@code c}.
- *   <li>Entfernt diesen Auftrag aus {@code completedOrders} und gibt ihn zurück.
- *   <li>Gibt {@code Optional.empty()} zurück, wenn kein fertiggestellter Auftrag für den Kunden
- *       existiert.
- *   <li>Wirft keine Exception bei leerem {@code completedOrders}.
- * </ul>
- *
- * <h2>Warum Mockito?</h2>
- *
- * <p>Auch hier sind {@link Order}-Objekte nötig, die als Zustand in der Shop-internen Queue landen.
- * {@code repair()} und {@code deliver()} lesen von diesen Objekten (mindestens {@code
- * getCustomer()}). Da {@link Order} nur Stubs enthält, mocken wir sie wieder mit Mockito, damit die
- * echten Shop-Methoden getestet werden können. Die Shop-Methoden selbst werden nicht gemockt.
- */
 class ShopRepairDeliverTest {
 
     private Shop shop;
