@@ -7,53 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-/**
- * Tests für Shop#accept (Aufgabe 2.2).
- *
- * <p>Äquivalenzklassen & Grenzwertanalyse (Aufgabe 2.1):
- *
- * <h2>Eingabeparameter / Bedingungen</h2>
- *
- * <h3>1. Fahrradtyp (getBicycleType())</h3>
- *
- * <ul>
- *   <li>ÄK1 (ungültig): Typ == EBIKE → Auftrag wird abgelehnt
- *   <li>ÄK2 (ungültig): Typ == GRAVEL → Auftrag wird abgelehnt
- *   <li>ÄK3 (gültig): Typ ∈ {RACE, SINGLE_SPEED, FIXIE} → Typ allein kein Ablehnungsgrund
- * </ul>
- *
- * <h3>2. Offene Aufträge desselben Kunden (getCustomer())</h3>
- *
- * <ul>
- *   <li>ÄK4 (ungültig): Kunde hat bereits einen offenen Auftrag → Ablehnung
- *   <li>ÄK5 (gültig): Kunde hat keinen offenen Auftrag → kein Ablehnungsgrund
- * </ul>
- *
- * <h3>3. Gesamtzahl offener Aufträge (pendingOrders.size())</h3>
- *
- * <ul>
- *   <li>ÄK6 (gültig): Anzahl < 5 → Warteschlange nicht voll
- *   <li>ÄK7 (ungültig): Anzahl ≥ 5 → Warteschlange voll, Ablehnung
- * </ul>
- *
- * <h3>Grenzwerte (Bedingung: size ≤ 4 zum Zeitpunkt der Annahme)</h3>
- *
- * <ul>
- *   <li>GW1: 0 Aufträge in der Queue → Annahme möglich (untere Grenze)
- *   <li>GW2: 3 Aufträge in der Queue → Annahme möglich (unter der Grenze)
- *   <li>GW3: 4 Aufträge in der Queue → Annahme möglich (genau an der Grenze: 5. Auftrag)
- *   <li>GW4: 5 Aufträge in der Queue → Ablehnung (eine über der Grenze)
- * </ul>
- *
- * <h2>Warum Mockito?</h2>
- *
- * <p>Die Klasse {@link Order} ist nur als Stub implementiert: alle Methoden werfen sofort eine
- * {@link UnsupportedOperationException}. Da wir {@code Shop#accept} – die echte, fertige Methode –
- * testen wollen, brauchen wir funktionierende {@link Order}-Objekte. Mit Mockito können wir diese
- * mocken und gezielt steuern, was {@code getBicycleType()} und {@code getCustomer()} zurückgeben,
- * ohne auf eine vollständige Implementierung von {@link Order} angewiesen zu sein. So testen wir
- * ausschließlich das Verhalten von {@code Shop#accept} in Isolation.
- */
 class ShopAcceptTest {
 
     private Shop shop;
